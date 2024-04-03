@@ -93,7 +93,7 @@ class Group {
 
   _area: string = '';
   _status: string = '';
-  _students: any[] = []; // Modify the array so that it has a valid toSorted method*
+  _students: number[] = []; // Modify the array so that it has a valid toSorted method*
 
   _directionName: string;
   _levelName: string;
@@ -141,7 +141,7 @@ class Student {
   _birthYear: number;
 
   _grades: {}[] = []; // workName: mark
-  _visits: {}[]= []; // lesson: present
+  _visits: {}[] = []; // lesson: present
 
   constructor(firstName: string, lastName: string, birthYear: number) {
     this._firstName = firstName;
@@ -172,11 +172,11 @@ class Student {
     return (averageGrade + attendancePercentage) / 2;
   }
 
-  setGrade(workName: string, grade: number): void {
-    this._grades.push({ [workName]: grade });
+  set grade(grade: { [key: string]: number }) {
+    this._grades.push(grade);
   }
 
-  setVisit(lesson: string, present: boolean): void {
-    this._visits.push({ [lesson]: present });
+  set visit(visit: { lesson: string; present: boolean }) {
+    this._visits.push(visit);
   }
 }
