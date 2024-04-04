@@ -88,12 +88,16 @@ class Level {
   }
 }
 
+interface Student {
+  getPerformanceRating(): number;
+}
+
 class Group {
   // implement getters for fields and 'add/remove student' and 'set status' methods
 
   _area: string = '';
   _status: string = '';
-  _students: number[] = []; // Modify the array so that it has a valid toSorted method*
+  _students: Student[] = []; // Modify the array so that it has a valid toSorted method*
 
   _directionName: string;
   _levelName: string;
@@ -103,7 +107,7 @@ class Group {
     this._levelName = levelName;
   }
 
-  showPerformance(): number[] {
+  showPerformance(): Student[] {
     const sortedStudents = this._students.toSorted((a, b) => b.getPerformanceRating() - a.getPerformanceRating());
     return sortedStudents;
   }
@@ -116,19 +120,19 @@ class Group {
     return this._status;
   }
 
-  get students(): number[] {
+  get students(): Student[] {
     return this._students;
   }
 
-  addStudents(student: string): void {
+  addStudents(student: Student): void {
     this._students.push(student);
   }
 
-  removeStudents(student: string) {
+  removeStudents(student: Student) {
     this._students = this._students.filter(valueStudent => valueStudent !== student);
   }
 
-  setStatus(status: string): void {
+  set status(status: string) {
     this._status = status;
   }
 }
