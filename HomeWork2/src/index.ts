@@ -1,31 +1,47 @@
 class School {
   // implement 'add area', 'remove area', 'add lecturer', and 'remove lecturer' methods
 
-  _areas = [];
-  _lecturers: string[] = []; // Name, surname, position, company, experience, courses, contacts
+  _areas: string[] = [];
+  _lecturers: {
+    name: string;
+    surname: string;
+    position: string;
+    company: string;
+    experience: number;
+    courses: string[];
+    contacts: string[];
+  }[] = []; // Name, surname, position, company, experience, courses, contacts
 
   get areas(): any[] {
     return this._areas;
   }
 
-  get lecturers(): string[] {
+  get lecturers(): {}[] {
     return this._lecturers;
   }
 
   addArea(area: string): void {
-    this._lecturers.push(area);
+    this._areas.push(area);
   }
 
   removeArea(area: string): void {
-    this._lecturers = this._lecturers.filter(value => value !== area);
+    this._areas = this._areas.filter(value => value !== area);
   }
 
-  addLecturer(lacturer: string): void {
+  addLecturer(lacturer: {
+    name: string;
+    surname: string;
+    position: string;
+    company: string;
+    experience: number;
+    courses: string[];
+    contacts: string[];
+  }): void {
     this._lecturers.push(lacturer);
   }
 
-  removeLecturer(lacturer: string): void {
-    this._lecturers = this._lecturers.filter(value => value !== lacturer);
+  removeLecturer(name: string): void {
+    this._lecturers = this._lecturers.filter(lecturer => lecturer.name !== name);
   }
 }
 
@@ -88,10 +104,6 @@ class Level {
   }
 }
 
-interface Student {
-  getPerformanceRating(): number;
-}
-
 class Group {
   // implement getters for fields and 'add/remove student' and 'set status' methods
 
@@ -128,7 +140,7 @@ class Group {
     this._students.push(student);
   }
 
-  removeStudents(student: Student) {
+  removeStudents(student: Student): void {
     this._students = this._students.filter(valueStudent => valueStudent !== student);
   }
 
@@ -144,7 +156,7 @@ class Student {
   _lastName: string;
   _birthYear: number;
 
-  _grades: {}[] = []; // workName: mark
+	_grades: {}[] = []; // workName: mark
   _visits: {}[] = []; // lesson: present
 
   constructor(firstName: string, lastName: string, birthYear: number) {
@@ -166,7 +178,7 @@ class Student {
   }
 
   getPerformanceRating(): number {
-    const gradeValues = Object.values(this._grades);
+    const gradeValues: [] = Object.values(this._grades);
 
     if (!gradeValues.length) return 0;
 
